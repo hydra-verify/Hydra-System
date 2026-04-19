@@ -13,16 +13,124 @@ body {
   color: white;
 }
 
-/* NAVBAR */
-.nav {
+/* MENU */
+.menu-btn {
   position: fixed;
-  top: 0;
+  top: 20px;
   left: 20px;
   font-size: 28px;
-  font-weight: bold;
-  color: #00c6ff;
-  padding: 20px;
+  cursor: pointer;
   z-index: 10;
+}
+
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background: #020617;
+  padding-top: 80px;
+  transition: 0.3s;
+  z-index: 9;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: #00c6ff33;
+}
+
+/* SEÇÕES */
+.page {
+  display: none;
+  position: relative;
+  z-index: 2;
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.active {
+  display: block;
+}
+
+h1 {
+  color: #00c6ff;
+}
+
+/* BOTÃO */
+.btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stats span {
+  display: block;
+  font-size: 28px;
+  color: #00c6ff;
+}
+
+/* SEARCH */
+.search {
+  margin: 20px auto;
+  padding: 12px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  border: none;
+  background: #0f172a;
+  color: white;
+}
+
+/* CATEGORIAS */
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cat-btn {
+  padding: 8px 15px;
+  background: #00c6ff22;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* COMANDOS */
+.commands {
+  margin-top: 30px;
+  display: grid;
+  gap: 15px;
+}
+
+.cmd {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.cmd b {
+  color: #00c6ff;
 }
 
 /* FUNDO */
@@ -32,210 +140,136 @@ canvas {
   height: 100%;
   z-index: 0;
 }
-
-/* CONTEÚDO */
-.container {
-  position: relative;
-  z-index: 2;
-  padding: 120px 20px;
-  text-align: center;
-}
-
-/* TÍTULOS */
-h1 {
-  font-size: 40px;
-  color: #00c6ff;
-}
-
-.big-text {
-  font-size: 20px;
-  margin-top: 10px;
-  opacity: 0.9;
-}
-
-/* BOTÃO */
-.btn {
-  margin-top: 30px;
-  padding: 18px 35px;
-  border-radius: 15px;
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* STATS */
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 60px;
-  font-size: 18px;
-}
-
-.stats div {
-  text-align: center;
-}
-
-.stats span {
-  display: block;
-  font-size: 28px;
-  color: #00c6ff;
-  font-weight: bold;
-}
-
-/* SEÇÕES GRANDES */
-.section {
-  margin-top: 80px;
-}
-
-.section h2 {
-  font-size: 32px;
-  color: #00c6ff;
-}
-
-.section p {
-  font-size: 20px;
-  max-width: 600px;
-  margin: 15px auto;
-  opacity: 0.85;
-}
 </style>
 </head>
 
 <body>
 
-<div class="nav">Hydra</div>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="menu">
+  <a onclick="showPage('home')">🏠 Início</a>
+  <a onclick="showPage('commands')">📜 Comandos</a>
+</div>
 
 <canvas id="bg"></canvas>
 
-<div class="container">
-
-  <!-- INFO PRINCIPAL -->
+<!-- HOME -->
+<div class="page active" id="home">
   <h1>Hydra Tecnologias</h1>
-  <p class="big-text">
-    Esse bot foi destinado para brincadeiras, suporte, moderação e muito mais.
-  </p>
+  <p>Esse bot foi destinado para brincadeiras, suporte, moderação e muito mais.</p>
 
-  <!-- TEXTO GRANDE -->
-  <div class="section">
-    <h2>Como adicionar o bot</h2>
-    <p>
-      Para adicionar o Hydra ao seu servidor, basta clicar no botão abaixo,
-      selecionar o servidor desejado e autorizar todas as permissões.
-      Após isso, o bot estará pronto para uso com todos os comandos disponíveis.
-    </p>
+  <h2>Como adicionar o bot</h2>
+  <p>Clique no botão abaixo e autorize no seu servidor.</p>
 
-    <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&integration_type=0&scope=bot+applications.commands">
-      ➕ Adicionar Bot
-    </a>
+  <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1487580689615552552&permissions=8&integration_type=0&scope=bot+applications.commands">
+    Adicionar Bot
+  </a>
+
+  <div class="stats">
+    <div><span>10</span>Servidores</div>
+    <div><span>10</span>Usuários</div>
+    <div><span>58</span>Comandos</div>
   </div>
 
-  <!-- STATS -->
-  <div class="section">
-    <h2>Informações do Bot</h2>
+  <h2 style="margin-top:50px;">Quando o Bot Foi Criado</h2>
+  <p>O bot foi criado no dia 28 de março de 2026.</p>
+</div>
 
-    <div class="stats">
-      <div>
-        <span>10</span>
-        Servidores
-      </div>
+<!-- COMANDOS -->
+<div class="page" id="commands">
+  <h1>Comandos Por Categorias do Hydra</h1>
 
-      <div>
-        <span>10</span>
-        Usuários
-      </div>
+  <input class="search" id="search" placeholder="🔍 Pesquisar...">
 
-      <div>
-        <span>58</span>
-        Comandos
-      </div>
-    </div>
+  <div class="categories">
+    <div class="cat-btn" onclick="filterCat('mod')">Moderação</div>
+    <div class="cat-btn" onclick="filterCat('util')">Utilidade</div>
+    <div class="cat-btn" onclick="filterCat('fun')">Diversão</div>
+    <div class="cat-btn" onclick="filterCat('eco')">Economia</div>
+    <div class="cat-btn" onclick="filterCat('all')">Todos</div>
   </div>
 
-  <!-- CRIAÇÃO -->
-  <div class="section">
-    <h2>Quando o Bot Foi Criado</h2>
-    <p>
-      O bot foi criado no dia 28 de março de 2026 com o objetivo
-      de trazer uma experiência completa, moderna e eficiente
-      para servidores do Discord.
-    </p>
-  </div>
+  <div class="commands">
 
-  <!-- EXTRA -->
-  <div class="section">
-    <h2>Sobre o Hydra</h2>
-    <p>
-      Hydra é um sistema avançado focado em automação, segurança
-      e diversão dentro do Discord. Com constantes atualizações,
-      o bot evolui para entregar sempre a melhor experiência possível.
-    </p>
-  </div>
+    <div class="cmd mod"><b>/ban</b><br>Banir usuário</div>
+    <div class="cmd mod"><b>/kick</b><br>Expulsar usuário</div>
+    <div class="cmd mod"><b>/ban_all</b><br>Banir membros suspeitos</div>
+    <div class="cmd mod"><b>/unban</b><br>Desbanir usuário</div>
+    <div class="cmd mod"><b>/clear</b><br>Limpar chat</div>
 
+    <div class="cmd util"><b>/calculadora</b><br>Fazer cálculos</div>
+    <div class="cmd util"><b>/traduzir</b><br>Traduzir texto</div>
+    <div class="cmd util"><b>/lembrete</b><br>Criar lembrete</div>
+
+    <div class="cmd fun"><b>/ship</b><br>Compatibilidade</div>
+    <div class="cmd fun"><b>/beijar</b><br>Beijar alguém</div>
+
+    <div class="cmd eco"><b>/saldo</b><br>Ver saldo</div>
+    <div class="cmd eco"><b>/doar_moedas</b><br>Doar moedas</div>
+
+  </div>
 </div>
 
 <script>
-// FUNDO MOLÉCULAS
+function toggleMenu() {
+  let menu = document.getElementById("menu");
+  menu.style.left = menu.style.left === "0px" ? "-250px" : "0px";
+}
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
+}
+
+/* PESQUISA */
+document.getElementById("search").addEventListener("input", function() {
+  let value = this.value.toLowerCase();
+  document.querySelectorAll(".cmd").forEach(cmd => {
+    cmd.style.display = cmd.innerText.toLowerCase().includes(value) ? "block" : "none";
+  });
+});
+
+/* FILTRO */
+function filterCat(cat) {
+  document.querySelectorAll(".cmd").forEach(cmd => {
+    if (cat === "all") cmd.style.display = "block";
+    else cmd.style.display = cmd.classList.contains(cat) ? "block" : "none";
+  });
+}
+
+/* FUNDO */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-
 for (let i = 0; i < 80; i++) {
   particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    vx: (Math.random()-0.5)*0.5,
+    vy: (Math.random()-0.5)*0.5
   });
 }
 
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  particles.forEach((p, i) => {
-    p.x += p.vx;
-    p.y += p.vy;
-
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+  particles.forEach(p => {
+    p.x+=p.vx;
+    p.y+=p.vy;
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = "#00c6ff";
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fillStyle="#00c6ff";
     ctx.fill();
-
-    particles.forEach((p2, j) => {
-      let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-      if (dist < 120) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = "rgba(0,198,255,0.1)";
-        ctx.stroke();
-      }
-    });
   });
 
   requestAnimationFrame(animate);
 }
-
 animate();
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
 </script>
 
 </body>
