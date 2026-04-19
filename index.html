@@ -18,7 +18,7 @@ body {
   position: fixed;
   top: 20px;
   left: 20px;
-  font-size: 28px;
+  font-size: 30px;
   cursor: pointer;
   z-index: 10;
 }
@@ -32,12 +32,12 @@ body {
   background: #020617;
   padding-top: 80px;
   transition: 0.3s;
-  z-index: 9;
 }
 
 .sidebar a {
   display: block;
   padding: 15px;
+  font-size: 18px;
   color: white;
   text-decoration: none;
 }
@@ -46,12 +46,10 @@ body {
   background: #00c6ff33;
 }
 
-/* SEÇÕES */
+/* PAGES */
 .page {
   display: none;
-  position: relative;
-  z-index: 2;
-  padding: 120px 20px;
+  padding: 140px 20px;
   text-align: center;
 }
 
@@ -59,41 +57,54 @@ body {
   display: block;
 }
 
+/* TEXTOS */
 h1 {
+  font-size: 48px;
   color: #00c6ff;
+}
+
+h2 {
+  font-size: 32px;
+  margin-top: 40px;
+}
+
+p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: auto;
 }
 
 /* BOTÃO */
 .btn {
-  margin-top: 20px;
-  padding: 15px 30px;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  margin-top: 30px;
+  padding: 20px 40px;
+  font-size: 20px;
+  border-radius: 15px;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
   color: white;
   text-decoration: none;
-  display: inline-block;
 }
 
 /* STATS */
 .stats {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
+  gap: 60px;
+  margin-top: 50px;
 }
 
 .stats span {
-  display: block;
-  font-size: 28px;
+  font-size: 40px;
   color: #00c6ff;
+  display: block;
 }
 
 /* SEARCH */
 .search {
-  margin: 20px auto;
-  padding: 12px;
-  width: 80%;
-  max-width: 400px;
+  margin: 30px auto;
+  padding: 15px;
+  width: 90%;
+  max-width: 500px;
   border-radius: 10px;
   border: none;
   background: #0f172a;
@@ -109,7 +120,7 @@ h1 {
 }
 
 .cat-btn {
-  padding: 8px 15px;
+  padding: 10px 20px;
   background: #00c6ff22;
   border-radius: 10px;
   cursor: pointer;
@@ -124,13 +135,29 @@ h1 {
 
 .cmd {
   background: #0f172a;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cmd-info {
   text-align: left;
 }
 
 .cmd b {
   color: #00c6ff;
+  font-size: 18px;
+}
+
+/* BOTÃO COPIAR */
+.copy-btn {
+  background: #00c6ff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* FUNDO */
@@ -172,7 +199,7 @@ canvas {
     <div><span>58</span>Comandos</div>
   </div>
 
-  <h2 style="margin-top:50px;">Quando o Bot Foi Criado</h2>
+  <h2>Quando o Bot Foi Criado</h2>
   <p>O bot foi criado no dia 28 de março de 2026.</p>
 </div>
 
@@ -183,30 +210,57 @@ canvas {
   <input class="search" id="search" placeholder="🔍 Pesquisar...">
 
   <div class="categories">
+    <div class="cat-btn" onclick="filterCat('all')">Todos</div>
     <div class="cat-btn" onclick="filterCat('mod')">Moderação</div>
     <div class="cat-btn" onclick="filterCat('util')">Utilidade</div>
     <div class="cat-btn" onclick="filterCat('fun')">Diversão</div>
     <div class="cat-btn" onclick="filterCat('eco')">Economia</div>
-    <div class="cat-btn" onclick="filterCat('all')">Todos</div>
   </div>
 
-  <div class="commands">
+  <div class="commands" id="cmdList">
 
-    <div class="cmd mod"><b>/ban</b><br>Banir usuário</div>
-    <div class="cmd mod"><b>/kick</b><br>Expulsar usuário</div>
-    <div class="cmd mod"><b>/ban_all</b><br>Banir membros suspeitos</div>
-    <div class="cmd mod"><b>/unban</b><br>Desbanir usuário</div>
-    <div class="cmd mod"><b>/clear</b><br>Limpar chat</div>
+    <!-- EXEMPLO -->
+    <div class="cmd mod">
+      <div class="cmd-info">
+        <b>/ban</b><br>Banir usuário
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/ban')">Copiar</button>
+    </div>
 
-    <div class="cmd util"><b>/calculadora</b><br>Fazer cálculos</div>
-    <div class="cmd util"><b>/traduzir</b><br>Traduzir texto</div>
-    <div class="cmd util"><b>/lembrete</b><br>Criar lembrete</div>
+    <div class="cmd mod">
+      <div class="cmd-info">
+        <b>/kick</b><br>Expulsar usuário
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/kick')">Copiar</button>
+    </div>
 
-    <div class="cmd fun"><b>/ship</b><br>Compatibilidade</div>
-    <div class="cmd fun"><b>/beijar</b><br>Beijar alguém</div>
+    <div class="cmd util">
+      <div class="cmd-info">
+        <b>/calculadora</b><br>Fazer cálculos
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/calculadora')">Copiar</button>
+    </div>
 
-    <div class="cmd eco"><b>/saldo</b><br>Ver saldo</div>
-    <div class="cmd eco"><b>/doar_moedas</b><br>Doar moedas</div>
+    <div class="cmd util">
+      <div class="cmd-info">
+        <b>/lembrete</b><br>Criar lembrete
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/lembrete')">Copiar</button>
+    </div>
+
+    <div class="cmd fun">
+      <div class="cmd-info">
+        <b>/ship</b><br>Compatibilidade
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/ship')">Copiar</button>
+    </div>
+
+    <div class="cmd eco">
+      <div class="cmd-info">
+        <b>/saldo</b><br>Ver saldo
+      </div>
+      <button class="copy-btn" onclick="copyCmd('/saldo')">Copiar</button>
+    </div>
 
   </div>
 </div>
@@ -222,19 +276,24 @@ function showPage(page) {
   document.getElementById(page).classList.add("active");
 }
 
+/* COPIAR */
+function copyCmd(cmd) {
+  navigator.clipboard.writeText(cmd);
+}
+
 /* PESQUISA */
 document.getElementById("search").addEventListener("input", function() {
   let value = this.value.toLowerCase();
   document.querySelectorAll(".cmd").forEach(cmd => {
-    cmd.style.display = cmd.innerText.toLowerCase().includes(value) ? "block" : "none";
+    cmd.style.display = cmd.innerText.toLowerCase().includes(value) ? "flex" : "none";
   });
 });
 
 /* FILTRO */
 function filterCat(cat) {
   document.querySelectorAll(".cmd").forEach(cmd => {
-    if (cat === "all") cmd.style.display = "block";
-    else cmd.style.display = cmd.classList.contains(cat) ? "block" : "none";
+    if (cat === "all") cmd.style.display = "flex";
+    else cmd.style.display = cmd.classList.contains(cat) ? "flex" : "none";
   });
 }
 
